@@ -7,10 +7,10 @@
 :root {
     --primary-color: #6366f1;
     --secondary-color: #8b5cf6;
-    --text-color: #1f2937;
-    --bg-color: #ffffff;
-    --bg-light: #f9fafb;
-    --border-color: #e5e7eb;
+    --text-color: #ffffff;
+    --bg-color: #000000;
+    --bg-light: #1a1a1a;
+    --border-color: #333333;
 }
 
 body {
@@ -22,7 +22,7 @@ body {
 
 header {
     background: var(--bg-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -121,7 +121,7 @@ nav {
 .section p {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #6b7280;
+    color: #d1d5db;
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
@@ -139,11 +139,12 @@ nav {
 }
 
 .service-card {
-    background: white;
+    background: #1a1a1a;
     padding: 2.5rem;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -164,7 +165,7 @@ nav {
 }
 
 .service-card p {
-    color: #6b7280;
+    color: #d1d5db;
     text-align: center;
 }
 
@@ -187,6 +188,8 @@ nav {
     border-radius: 8px;
     font-size: 1rem;
     font-family: inherit;
+    background-color: #1a1a1a;
+    color: var(--text-color);
     transition: border-color 0.3s ease;
 }
 
@@ -214,10 +217,11 @@ nav {
 }
 
 footer {
-    background: var(--text-color);
+    background: #000000;
     color: white;
     text-align: center;
     padding: 2rem;
+    border-top: 1px solid var(--border-color);
 }
 
 @keyframes fadeInUp {
