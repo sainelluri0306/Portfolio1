@@ -100,7 +100,7 @@ document.querySelectorAll('.section').forEach(section => {
     
     // Single color scheme (primary color variations) - matching menu bar highlight
     const primaryColor = { r: 99, g: 102, b: 241 }; // #6366f1 (primary-color - menu bar highlight)
-    const darkColor = { r: 40, g: 40, b: 40 }; // Very dark base
+    const darkColor = { r: 50, g: 50, b: 65 }; // Very subtle tint of primary color for base visibility
     
     // Get sidebar bounds to exclude from dots
     function getSidebarBounds() {
@@ -147,9 +147,9 @@ document.querySelectorAll('.section').forEach(section => {
                     baseSize: 0.4,
                     currentSize: 0.4,
                     targetSize: 0.4,
-                    baseColor: { ...darkColor },
-                    currentColor: { ...darkColor },
-                    targetColor: { ...darkColor },
+                    baseColor: { r: 55, g: 55, b: 75 }, // Very subtle primary color tint
+                    currentColor: { r: 55, g: 55, b: 75 },
+                    targetColor: { r: 55, g: 55, b: 75 },
                     waveOffset: Math.random() * Math.PI * 2
                 });
             }
@@ -212,9 +212,9 @@ document.querySelectorAll('.section').forEach(section => {
                     b: darkColor.b + (primaryColor.b - darkColor.b) * influence
                 };
             } else {
-                // Return to base smoothly with easing
+                // Return to base smoothly with easing - very subtle primary color tint
                 dot.targetSize = 0.4;
-                dot.targetColor = { ...darkColor };
+                dot.targetColor = { r: 55, g: 55, b: 75 }; // Very subtle base with slight primary color tint
             }
             
             // Smooth interpolation for fluid animation
