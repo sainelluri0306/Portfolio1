@@ -86,77 +86,123 @@ document.querySelectorAll('.section').forEach(section => {
     observer.observe(section);
 });
 
-// Interactive dots background
+// Interactive dots background - Full page with wrap effect
 (function() {
     const canvas = document.getElementById('dotsCanvas');
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    const hero = document.querySelector('.hero');
     
-    let mouseX = 0;
-    let mouseY = 0;
+    let mouseX = -1000;
+    let mouseY = -1000;
     let dots = [];
+    let animationId = null;
+    
+    // Single color scheme (primary color variations)
+    const baseColor = { r: 99, g: 102, b: 241 }; // #6366f1 (primary-color)
+    const darkColor = { r: 40, g: 40, b: 40 }; // Very dark base
+    
+    // Get sidebar bounds to exclude from dots
+    function getSidebarBounds() {
+        const sidebar = document.querySelector('.sidebar');
+        if (!sidebar) return { left: 0, right: 0, top: 0, bottom: 0 };
+        const rect = sidebar.getBoundingClientRect();
+        return {
+            left: rect.left - 50,
+            right: rect.right + 50,
+            top: rect.top - 100,
+            bottom: rect.bottom + 100
+        };
+    }
     
     // Set canvas size
     function resizeCanvas() {
-        canvas.width = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
         initDots();
     }
     
-    // Initialize dots
+    // Initialize dots - exclude sidebar area
     function initDots() {
         dots = [];
-        const spacing = 50;
+        const spacing = 40;
+        const sidebarBounds = getSidebarBounds();
         const rows = Math.ceil(canvas.height / spacing);
         const cols = Math.ceil(canvas.width / spacing);
         
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
+                const x = j * spacing + (spacing / 2);
+                const y = i * spacing + (spacing / 2);
+                
+                // Skip dots in sidebar area
+                if (x >= sidebarBounds.left && x <= sidebarBounds.right &&
+                    y >= sidebarBounds.top && y <= sidebarBounds.bottom) {
+                    continue;
+                }
+                
                 dots.push({
-                    x: j * spacing + (spacing / 2),
-                    y: i * spacing + (spacing / 2),
-                    baseSize: 0.5,
-                    currentSize: 0.5,
-                    baseColor: { r: 60, g: 60, b: 60 },
-                    currentColor: { r: 60, g: 60, b: 60 }
+                    x: x,
+                    y: y,
+                    baseSize: 0.4,
+                    currentSize: 0.4,
+                    targetSize: 0.4,
+                    baseColor: { ...darkColor },
+                    currentColor: { ...darkColor },
+                    targetColor: { ...darkColor },
+                    waveOffset: Math.random() * Math.PI * 2
                 });
             }
         }
-        drawDots();
+        if (!animationId) {
+            drawDots();
+        }
     }
     
-    // Draw all dots
+    // Wave function for wrap effect
+    function waveEffect(distance, maxDistance, waveOffset) {
+        const normalizedDist = distance / maxDistance;
+        const wave = Math.sin(normalizedDist * Math.PI * 3 - waveOffset) * 0.5 + 0.5;
+        return Math.pow(1 - normalizedDist, 2) * wave;
+    }
+    
+    // Draw all dots with smooth flow
     function drawDots() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        const maxDistance = 200;
+        const time = Date.now() * 0.001;
         
         dots.forEach(dot => {
             // Calculate distance from mouse
             const dx = mouseX - dot.x;
             const dy = mouseY - dot.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            const maxDistance = 150;
             
-            // Calculate size based on proximity to mouse
             if (distance < maxDistance) {
-                const influence = 1 - (distance / maxDistance);
-                dot.currentSize = dot.baseSize + (influence * 6);
+                // Wrap effect using wave function
+                const waveOffset = dot.waveOffset + time * 2;
+                const influence = waveEffect(distance, maxDistance, waveOffset);
                 
-                // Change color based on proximity (from dark grey to a lighter color)
-                const colorIntensity = influence;
-                dot.currentColor = {
-                    r: 60 + (colorIntensity * 155),
-                    g: 100 + (colorIntensity * 155),
-                    b: 150 + (colorIntensity * 105)
+                // Target values based on influence
+                dot.targetSize = 0.4 + (influence * 5);
+                dot.targetColor = {
+                    r: darkColor.r + (baseColor.r - darkColor.r) * influence,
+                    g: darkColor.g + (baseColor.g - darkColor.g) * influence,
+                    b: darkColor.b + (baseColor.b - darkColor.b) * influence
                 };
             } else {
-                // Return to base size and color smoothly
-                dot.currentSize += (dot.baseSize - dot.currentSize) * 0.1;
-                dot.currentColor.r += (60 - dot.currentColor.r) * 0.1;
-                dot.currentColor.g += (60 - dot.currentColor.g) * 0.1;
-                dot.currentColor.b += (60 - dot.currentColor.b) * 0.1;
+                // Return to base smoothly with easing
+                dot.targetSize = 0.4;
+                dot.targetColor = { ...darkColor };
             }
+            
+            // Smooth interpolation for fluid animation
+            const ease = 0.15;
+            dot.currentSize += (dot.targetSize - dot.currentSize) * ease;
+            dot.currentColor.r += (dot.targetColor.r - dot.currentColor.r) * ease;
+            dot.currentColor.g += (dot.targetColor.g - dot.currentColor.g) * ease;
+            dot.currentColor.b += (dot.targetColor.b - dot.currentColor.b) * ease;
             
             // Draw dot
             ctx.beginPath();
@@ -165,23 +211,18 @@ document.querySelectorAll('.section').forEach(section => {
             ctx.fill();
         });
         
-        requestAnimationFrame(drawDots);
+        animationId = requestAnimationFrame(drawDots);
     }
     
-    // Track mouse movement
-    hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        mouseX = e.clientX - rect.left;
-        mouseY = e.clientY - rect.top;
-    });
-    
-    // Handle mouse leave
-    hero.addEventListener('mouseleave', () => {
-        mouseX = -1000;
-        mouseY = -1000;
+    // Track mouse movement globally
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
     
     // Initialize on load
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+    });
 })();
