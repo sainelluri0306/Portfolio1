@@ -145,7 +145,11 @@ main {
     opacity: 0;
     animation: fadeInUp 1s ease 0.2s forwards;
     font-weight: 700;
-    color: white;
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 15%, #c0c0c0 85%, #9ca3af 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: white; /* Fallback for browsers that don't support background-clip */
 }
 
 .role-title {
