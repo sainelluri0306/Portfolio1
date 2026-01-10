@@ -144,12 +144,12 @@ document.querySelectorAll('.section').forEach(section => {
                 dots.push({
                     x: x,
                     y: y,
-                    baseSize: 0.5, // Tiny but visible pinpricks
-                    currentSize: 0.5,
-                    targetSize: 0.5,
-                    baseColor: { r: 80, g: 85, b: 180 }, // Subtle but visible primary color tint
-                    currentColor: { r: 80, g: 85, b: 180 },
-                    targetColor: { r: 80, g: 85, b: 180 },
+                    baseSize: 0.6, // Very tiny pinpricks
+                    currentSize: 0.6,
+                    targetSize: 0.6,
+                    baseColor: { r: 70, g: 72, b: 110 }, // Subtle, less bright primary color tint
+                    currentColor: { r: 70, g: 72, b: 110 },
+                    targetColor: { r: 70, g: 72, b: 110 },
                     waveOffset: Math.random() * Math.PI * 2
                 });
             }
@@ -203,18 +203,18 @@ document.querySelectorAll('.section').forEach(section => {
                 const influence = waveEffect(distance, maxDistance, waveOffset);
                 
                 // Enlarge from tiny pinprick to visible size when hovering
-                dot.targetSize = 0.5 + (influence * 3);
+                dot.targetSize = 0.6 + (influence * 3);
                 
                 // Brighten to full primary color when hovering (menu bar highlight)
                 dot.targetColor = {
-                    r: 80 + (primaryColor.r - 80) * influence,
-                    g: 85 + (primaryColor.g - 85) * influence,
-                    b: 180 + (primaryColor.b - 180) * influence
+                    r: 70 + (primaryColor.r - 70) * influence,
+                    g: 72 + (primaryColor.g - 72) * influence,
+                    b: 110 + (primaryColor.b - 110) * influence
                 };
             } else {
-                // Return to tiny pinprick base - subtle but visible primary color
-                dot.targetSize = 0.5;
-                dot.targetColor = { r: 80, g: 85, b: 180 }; // Subtle but visible primary color tint
+                // Return to tiny pinprick base - subtle, less bright primary color
+                dot.targetSize = 0.6;
+                dot.targetColor = { r: 70, g: 72, b: 110 }; // Subtle, less bright primary color tint
             }
             
             // Smooth interpolation for fluid animation
@@ -245,8 +245,8 @@ document.querySelectorAll('.section').forEach(section => {
             
             // Draw dot - tiny pinprick when small, larger when hovered
             ctx.beginPath();
-            ctx.arc(dot.x, dot.y, Math.max(dot.currentSize, 0.5), 0, Math.PI * 2);
-            const dotAlpha = dot.currentSize < 1 ? 0.5 : 1; // Slightly more visible when tiny
+            ctx.arc(dot.x, dot.y, Math.max(dot.currentSize, 0.6), 0, Math.PI * 2);
+            const dotAlpha = dot.currentSize < 1.5 ? 0.4 : 1; // Very lightly visible at base size
             ctx.fillStyle = `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, ${dotAlpha})`;
             ctx.fill();
         });
