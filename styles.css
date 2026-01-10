@@ -141,7 +141,7 @@ main {
     opacity: 0;
     animation: fadeInUp 1s ease 0.2s forwards;
     font-weight: 700;
-    color: var(--primary-color);
+    color: white;
 }
 
 .role-title {
