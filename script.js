@@ -1,5 +1,29 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Sidebar icon click handlers
+document.querySelectorAll('.sidebar-icon').forEach(icon => {
+    icon.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // Remove active class from all icons
+        document.querySelectorAll('.sidebar-icon').forEach(i => i.classList.remove('active'));
+        
+        // Add active class to clicked icon
+        this.classList.add('active');
+        
+        // Get the section to scroll to
+        const sectionId = this.getAttribute('data-section') || this.getAttribute('href').substring(1);
+        const target = document.getElementById(sectionId);
+        
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Smooth scrolling for navigation links (for any other links)
+document.querySelectorAll('a[href^="#"]:not(.sidebar-icon)').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
@@ -7,6 +31,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
+            });
+            
+            // Update active icon based on scroll target
+            const sectionId = this.getAttribute('href').substring(1);
+            document.querySelectorAll('.sidebar-icon').forEach(icon => {
+                icon.classList.remove('active');
+                if (icon.getAttribute('data-section') === sectionId) {
+                    icon.classList.add('active');
+                }
             });
         }
     });
@@ -84,10 +117,10 @@ document.querySelectorAll('.section').forEach(section => {
                 dots.push({
                     x: j * spacing + (spacing / 2),
                     y: i * spacing + (spacing / 2),
-                    baseSize: 2,
-                    currentSize: 2,
-                    baseColor: { r: 100, g: 100, b: 100 },
-                    currentColor: { r: 100, g: 100, b: 100 }
+                    baseSize: 0.5,
+                    currentSize: 0.5,
+                    baseColor: { r: 60, g: 60, b: 60 },
+                    currentColor: { r: 60, g: 60, b: 60 }
                 });
             }
         }
@@ -108,21 +141,21 @@ document.querySelectorAll('.section').forEach(section => {
             // Calculate size based on proximity to mouse
             if (distance < maxDistance) {
                 const influence = 1 - (distance / maxDistance);
-                dot.currentSize = dot.baseSize + (influence * 4);
+                dot.currentSize = dot.baseSize + (influence * 6);
                 
-                // Change color based on proximity (from grey to a lighter color)
+                // Change color based on proximity (from dark grey to a lighter color)
                 const colorIntensity = influence;
                 dot.currentColor = {
-                    r: 100 + (colorIntensity * 155),
-                    g: 150 + (colorIntensity * 105),
-                    b: 200 + (colorIntensity * 55)
+                    r: 60 + (colorIntensity * 155),
+                    g: 100 + (colorIntensity * 155),
+                    b: 150 + (colorIntensity * 105)
                 };
             } else {
                 // Return to base size and color smoothly
                 dot.currentSize += (dot.baseSize - dot.currentSize) * 0.1;
-                dot.currentColor.r += (100 - dot.currentColor.r) * 0.1;
-                dot.currentColor.g += (100 - dot.currentColor.g) * 0.1;
-                dot.currentColor.b += (100 - dot.currentColor.b) * 0.1;
+                dot.currentColor.r += (60 - dot.currentColor.r) * 0.1;
+                dot.currentColor.g += (60 - dot.currentColor.g) * 0.1;
+                dot.currentColor.b += (60 - dot.currentColor.b) * 0.1;
             }
             
             // Draw dot

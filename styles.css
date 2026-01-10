@@ -22,38 +22,81 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-header {
-    background: var(--bg-color);
-    position: sticky;
-    top: 0;
+main {
+    margin-left: 90px;
+}
+
+.sidebar {
+    position: fixed;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 1000;
 }
 
-nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0.5rem 2rem;
+.sidebar-nav {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
+    flex-direction: column;
     gap: 1.5rem;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
 }
 
-.nav-links a {
-    text-decoration: none;
+.sidebar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
     color: var(--text-color);
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s ease;
+    text-decoration: none;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.nav-links a:hover {
+.sidebar-icon svg {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-icon:hover {
     color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.sidebar-icon.active {
+    color: var(--primary-color);
+}
+
+.sidebar-icon.active::after {
+    content: '';
+    position: absolute;
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    box-sizing: border-box;
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
 }
 
 .hero {
@@ -278,16 +321,27 @@ footer {
 }
 
 @media (max-width: 768px) {
-    nav {
-        padding: 0.5rem 1rem;
+    .sidebar {
+        left: 1rem;
     }
     
-    .nav-links {
-        gap: 0.75rem;
+    .sidebar-nav {
+        padding: 1rem 0.75rem;
+        gap: 1rem;
     }
     
-    .nav-links a {
-        font-size: 0.9rem;
+    .sidebar-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .sidebar-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    main {
+        margin-left: 70px;
     }
 
     .hero-content h1 {
