@@ -40,6 +40,7 @@ main {
 .section {
     position: relative;
     z-index: 1;
+    background: transparent;
 }
 
 .sidebar-nav {
@@ -108,7 +109,7 @@ main {
 }
 
 .hero {
-    background: #000000;
+    background: transparent;
     color: white;
     padding: 8rem 2rem;
     text-align: center;
@@ -131,7 +132,7 @@ main {
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
 
 .hero-content h1 {
@@ -184,6 +185,7 @@ main {
 
 .section {
     padding: 5rem 2rem;
+    background: transparent;
 }
 
 .container {
@@ -208,7 +210,7 @@ main {
 }
 
 .services {
-    background: var(--bg-light);
+    background: transparent;
 }
 
 .services-grid {
@@ -250,7 +252,7 @@ main {
 }
 
 .contact {
-    background: var(--bg-light);
+    background: transparent;
 }
 
 .contact-form {

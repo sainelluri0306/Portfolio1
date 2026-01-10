@@ -98,20 +98,20 @@ document.querySelectorAll('.section').forEach(section => {
     let dots = [];
     let animationId = null;
     
-    // Single color scheme (primary color variations)
-    const baseColor = { r: 99, g: 102, b: 241 }; // #6366f1 (primary-color)
+    // Single color scheme (primary color variations) - matching menu bar highlight
+    const primaryColor = { r: 99, g: 102, b: 241 }; // #6366f1 (primary-color - menu bar highlight)
     const darkColor = { r: 40, g: 40, b: 40 }; // Very dark base
     
     // Get sidebar bounds to exclude from dots
     function getSidebarBounds() {
         const sidebar = document.querySelector('.sidebar');
-        if (!sidebar) return { left: 0, right: 0, top: 0, bottom: 0 };
+        if (!sidebar) return { left: -1000, right: -1000, top: -1000, bottom: -1000 };
         const rect = sidebar.getBoundingClientRect();
         return {
-            left: rect.left - 50,
-            right: rect.right + 50,
-            top: rect.top - 100,
-            bottom: rect.bottom + 100
+            left: rect.left - 30,
+            right: rect.right + 30,
+            top: rect.top - 30,
+            bottom: rect.bottom + 30
         };
     }
     
@@ -122,7 +122,7 @@ document.querySelectorAll('.section').forEach(section => {
         initDots();
     }
     
-    // Initialize dots - exclude sidebar area
+    // Initialize dots - exclude sidebar area only
     function initDots() {
         dots = [];
         const spacing = 40;
@@ -135,7 +135,7 @@ document.querySelectorAll('.section').forEach(section => {
                 const x = j * spacing + (spacing / 2);
                 const y = i * spacing + (spacing / 2);
                 
-                // Skip dots in sidebar area
+                // Skip dots ONLY in the exact sidebar area (tight bounds)
                 if (x >= sidebarBounds.left && x <= sidebarBounds.right &&
                     y >= sidebarBounds.top && y <= sidebarBounds.bottom) {
                     continue;
@@ -166,12 +166,30 @@ document.querySelectorAll('.section').forEach(section => {
         return Math.pow(1 - normalizedDist, 2) * wave;
     }
     
-    // Draw all dots with smooth flow
+    // Draw all dots with smooth flow and torch effect
     function drawDots() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        const maxDistance = 200;
+        const maxDistance = 250;
         const time = Date.now() * 0.001;
+        
+        // Draw torch glow effect with primary color (menu bar highlight)
+        if (mouseX >= 0 && mouseY >= 0) {
+            const gradient = ctx.createRadialGradient(
+                mouseX, mouseY, 0,
+                mouseX, mouseY, 300
+            );
+            
+            // Torch effect with primary color matching menu bar highlight
+            gradient.addColorStop(0, `rgba(${primaryColor.r}, ${primaryColor.g}, ${primaryColor.b}, 0.35)`);
+            gradient.addColorStop(0.2, `rgba(${primaryColor.r}, ${primaryColor.g}, ${primaryColor.b}, 0.2)`);
+            gradient.addColorStop(0.5, `rgba(${primaryColor.r}, ${primaryColor.g}, ${primaryColor.b}, 0.1)`);
+            gradient.addColorStop(0.8, `rgba(${primaryColor.r}, ${primaryColor.g}, ${primaryColor.b}, 0.03)`);
+            gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(mouseX - 300, mouseY - 300, 600, 600);
+        }
         
         dots.forEach(dot => {
             // Calculate distance from mouse
@@ -184,12 +202,14 @@ document.querySelectorAll('.section').forEach(section => {
                 const waveOffset = dot.waveOffset + time * 2;
                 const influence = waveEffect(distance, maxDistance, waveOffset);
                 
-                // Target values based on influence
-                dot.targetSize = 0.4 + (influence * 5);
+                // Smaller enlargement (reduced from 5 to 2.5)
+                dot.targetSize = 0.4 + (influence * 2.5);
+                
+                // Use primary color (menu bar highlight) for torch effect
                 dot.targetColor = {
-                    r: darkColor.r + (baseColor.r - darkColor.r) * influence,
-                    g: darkColor.g + (baseColor.g - darkColor.g) * influence,
-                    b: darkColor.b + (baseColor.b - darkColor.b) * influence
+                    r: darkColor.r + (primaryColor.r - darkColor.r) * influence,
+                    g: darkColor.g + (primaryColor.g - darkColor.g) * influence,
+                    b: darkColor.b + (primaryColor.b - darkColor.b) * influence
                 };
             } else {
                 // Return to base smoothly with easing
@@ -203,6 +223,22 @@ document.querySelectorAll('.section').forEach(section => {
             dot.currentColor.r += (dot.targetColor.r - dot.currentColor.r) * ease;
             dot.currentColor.g += (dot.targetColor.g - dot.currentColor.g) * ease;
             dot.currentColor.b += (dot.targetColor.b - dot.currentColor.b) * ease;
+            
+            // Draw dot with glow effect
+            const glowRadius = dot.currentSize * 2;
+            const glowGradient = ctx.createRadialGradient(
+                dot.x, dot.y, 0,
+                dot.x, dot.y, glowRadius
+            );
+            glowGradient.addColorStop(0, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, 0.8)`);
+            glowGradient.addColorStop(0.5, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, 0.4)`);
+            glowGradient.addColorStop(1, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, 0)`);
+            
+            // Draw glow
+            ctx.beginPath();
+            ctx.arc(dot.x, dot.y, glowRadius, 0, Math.PI * 2);
+            ctx.fillStyle = glowGradient;
+            ctx.fill();
             
             // Draw dot
             ctx.beginPath();
