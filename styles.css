@@ -68,7 +68,7 @@ nav {
 }
 
 .hero-content h1 {
-    font-size: 5rem;
+    font-size: 6rem;
     margin-bottom: 1rem;
     opacity: 0;
     animation: fadeInUp 1s ease 0.2s forwards;
@@ -77,11 +77,11 @@ nav {
 
 .role-title {
     font-size: 2.1rem;
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeInUp 1s ease 0.4s forwards;
-    color: #9ca3af;
+    color: #c0c0c0;
 }
 
 .hero-description {
@@ -270,7 +270,7 @@ footer {
     }
 
     .hero-content h1 {
-        font-size: 3.5rem;
+        font-size: 4rem;
     }
 
     .role-title {
