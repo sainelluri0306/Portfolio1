@@ -76,12 +76,12 @@ nav {
 }
 
 .role-title {
-    font-size: 1.8rem;
+    font-size: 2.1rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeInUp 1s ease 0.4s forwards;
-    color: var(--primary-color);
+    color: #9ca3af;
 }
 
 .hero-description {
@@ -274,7 +274,7 @@ footer {
     }
 
     .role-title {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
 
     .hero-description {
