@@ -147,9 +147,9 @@ document.querySelectorAll('.section').forEach(section => {
                     baseSize: 0.6, // Very tiny pinpricks
                     currentSize: 0.6,
                     targetSize: 0.6,
-                    baseColor: { r: 70, g: 72, b: 110 }, // Subtle, less bright primary color tint
-                    currentColor: { r: 70, g: 72, b: 110 },
-                    targetColor: { r: 70, g: 72, b: 110 },
+                    baseColor: { r: 120, g: 120, b: 120 }, // Grey color when not hovered
+                    currentColor: { r: 120, g: 120, b: 120 },
+                    targetColor: { r: 120, g: 120, b: 120 },
                     waveOffset: Math.random() * Math.PI * 2
                 });
             }
@@ -205,16 +205,16 @@ document.querySelectorAll('.section').forEach(section => {
                 // Enlarge from tiny pinprick to visible size when hovering
                 dot.targetSize = 0.6 + (influence * 3);
                 
-                // Brighten to full primary color when hovering (menu bar highlight)
+                // Change from grey to full primary color when hovering (menu bar highlight)
                 dot.targetColor = {
-                    r: 70 + (primaryColor.r - 70) * influence,
-                    g: 72 + (primaryColor.g - 72) * influence,
-                    b: 110 + (primaryColor.b - 110) * influence
+                    r: 120 + (primaryColor.r - 120) * influence,
+                    g: 120 + (primaryColor.g - 120) * influence,
+                    b: 120 + (primaryColor.b - 120) * influence
                 };
             } else {
-                // Return to tiny pinprick base - subtle, less bright primary color
+                // Return to tiny pinprick base - grey color when not hovered
                 dot.targetSize = 0.6;
-                dot.targetColor = { r: 70, g: 72, b: 110 }; // Subtle, less bright primary color tint
+                dot.targetColor = { r: 120, g: 120, b: 120 }; // Grey color
             }
             
             // Smooth interpolation for fluid animation

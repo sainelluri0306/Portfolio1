@@ -173,23 +173,50 @@ main {
     color: #d1d5db;
 }
 
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .cta-button {
-    background: white;
-    color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
     border: none;
     padding: 1rem 2.5rem;
     font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 50px;
+    font-weight: 400;
+    border-radius: 8px;
     cursor: pointer;
+    display: inline-block;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateY(0) scale(1);
+    transform-origin: center center;
     opacity: 0;
-    animation: fadeInUp 1s ease 1s forwards, bounce 0.6s ease 2s;
+    animation-name: fadeInUp, bounce;
+    animation-duration: 1s, 0.6s;
+    animation-timing-function: ease, ease;
+    animation-delay: 1s, 2.6s;
+    animation-fill-mode: forwards, none;
 }
 
-.cta-button:hover {
-    transform: translateY(-2px);
+.cta-button:hover,
+.projects-button:hover,
+.contact-button:hover {
+    transform: translateY(-2px) scale(1.05);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.projects-button {
+    color: black;
+}
+
+.contact-button {
+    background: black;
+    color: white;
+    border: 1px solid white;
 }
 
 .section {
@@ -328,13 +355,13 @@ footer {
 
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
     40% {
-        transform: translateY(-15px);
+        transform: translateY(-15px) scale(1);
     }
     60% {
-        transform: translateY(-8px);
+        transform: translateY(-8px) scale(1);
     }
 }
 
