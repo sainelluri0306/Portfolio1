@@ -144,12 +144,12 @@ document.querySelectorAll('.section').forEach(section => {
                 dots.push({
                     x: x,
                     y: y,
-                    baseSize: 0.4,
-                    currentSize: 0.4,
-                    targetSize: 0.4,
-                    baseColor: { r: 55, g: 55, b: 75 }, // Very subtle primary color tint
-                    currentColor: { r: 55, g: 55, b: 75 },
-                    targetColor: { r: 55, g: 55, b: 75 },
+                    baseSize: 0.2, // Very tiny like pinpricks
+                    currentSize: 0.2,
+                    targetSize: 0.2,
+                    baseColor: { r: 60, g: 62, b: 120 }, // Very subtle primary color - like needle holes
+                    currentColor: { r: 60, g: 62, b: 120 },
+                    targetColor: { r: 60, g: 62, b: 120 },
                     waveOffset: Math.random() * Math.PI * 2
                 });
             }
@@ -202,19 +202,19 @@ document.querySelectorAll('.section').forEach(section => {
                 const waveOffset = dot.waveOffset + time * 2;
                 const influence = waveEffect(distance, maxDistance, waveOffset);
                 
-                // Smaller enlargement (reduced from 5 to 2.5)
-                dot.targetSize = 0.4 + (influence * 2.5);
+                // Enlarge from tiny pinprick to visible size when hovering
+                dot.targetSize = 0.2 + (influence * 3.5);
                 
-                // Use primary color (menu bar highlight) for torch effect
+                // Brighten to full primary color when hovering (menu bar highlight)
                 dot.targetColor = {
-                    r: darkColor.r + (primaryColor.r - darkColor.r) * influence,
-                    g: darkColor.g + (primaryColor.g - darkColor.g) * influence,
-                    b: darkColor.b + (primaryColor.b - darkColor.b) * influence
+                    r: 60 + (primaryColor.r - 60) * influence,
+                    g: 62 + (primaryColor.g - 62) * influence,
+                    b: 120 + (primaryColor.b - 120) * influence
                 };
             } else {
-                // Return to base smoothly with easing - very subtle primary color tint
-                dot.targetSize = 0.4;
-                dot.targetColor = { r: 55, g: 55, b: 75 }; // Very subtle base with slight primary color tint
+                // Return to tiny pinprick base - very subtle needle hole color
+                dot.targetSize = 0.2;
+                dot.targetColor = { r: 60, g: 62, b: 120 }; // Very subtle primary color - like tiny needle holes
             }
             
             // Smooth interpolation for fluid animation
@@ -224,26 +224,30 @@ document.querySelectorAll('.section').forEach(section => {
             dot.currentColor.g += (dot.targetColor.g - dot.currentColor.g) * ease;
             dot.currentColor.b += (dot.targetColor.b - dot.currentColor.b) * ease;
             
-            // Draw dot with glow effect
-            const glowRadius = dot.currentSize * 2;
-            const glowGradient = ctx.createRadialGradient(
-                dot.x, dot.y, 0,
-                dot.x, dot.y, glowRadius
-            );
-            glowGradient.addColorStop(0, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, 0.8)`);
-            glowGradient.addColorStop(0.5, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, 0.4)`);
-            glowGradient.addColorStop(1, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, 0)`);
+            // Only show glow effect when dot is enlarged (hovered)
+            if (dot.currentSize > 0.3) {
+                const glowRadius = dot.currentSize * 2.5;
+                const glowGradient = ctx.createRadialGradient(
+                    dot.x, dot.y, 0,
+                    dot.x, dot.y, glowRadius
+                );
+                const alpha = Math.min(dot.currentSize / 2, 0.6); // Glow intensity based on size
+                glowGradient.addColorStop(0, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, ${alpha * 0.8})`);
+                glowGradient.addColorStop(0.5, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, ${alpha * 0.4})`);
+                glowGradient.addColorStop(1, `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, 0)`);
+                
+                // Draw glow only when enlarged
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, glowRadius, 0, Math.PI * 2);
+                ctx.fillStyle = glowGradient;
+                ctx.fill();
+            }
             
-            // Draw glow
+            // Draw dot - tiny pinprick when small, larger when hovered
             ctx.beginPath();
-            ctx.arc(dot.x, dot.y, glowRadius, 0, Math.PI * 2);
-            ctx.fillStyle = glowGradient;
-            ctx.fill();
-            
-            // Draw dot
-            ctx.beginPath();
-            ctx.arc(dot.x, dot.y, dot.currentSize, 0, Math.PI * 2);
-            ctx.fillStyle = `rgb(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)})`;
+            ctx.arc(dot.x, dot.y, Math.max(dot.currentSize, 0.2), 0, Math.PI * 2);
+            const dotAlpha = dot.currentSize < 0.3 ? 0.3 : 1; // Very subtle when tiny
+            ctx.fillStyle = `rgba(${Math.round(dot.currentColor.r)}, ${Math.round(dot.currentColor.g)}, ${Math.round(dot.currentColor.b)}, ${dotAlpha})`;
             ctx.fill();
         });
         
