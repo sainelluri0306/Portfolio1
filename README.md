@@ -1,4 +1,4 @@
-# My Awesome Website
+# My Portfolio Website
 
 A modern, responsive website built with HTML, CSS, and JavaScript.
 
