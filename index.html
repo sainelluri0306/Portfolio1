@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
     <div class="social-icons">
         <a href="https://www.linkedin.com/in/sai-nelluri-7b354a266" target="_blank" class="social-icon" title="LinkedIn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -36,44 +38,41 @@
     <div class="email-display" onclick="window.open('https://mail.google.com/mail/?view=cm&to=siddhu.nelluri@gmail.com', '_blank')" style="cursor: pointer;">siddhu.nelluri@gmail.com</div>
     <aside class="sidebar">
         <nav class="sidebar-nav">
-            <a href="#home" class="sidebar-icon active" data-section="home" title="Home">
+            <a href="index.html" class="sidebar-icon active" data-section="home" title="Home">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
                 <span class="sidebar-label">Home</span>
             </a>
-            <a href="#contact" class="sidebar-icon" data-section="contact" title="About">
+            <a href="about.html" class="sidebar-icon" data-section="about" title="About Me">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                <span class="sidebar-label">About</span>
+                <span class="sidebar-label">About Me</span>
             </a>
-            <a href="#services" class="sidebar-icon" data-section="services" title="Work">
+            <a href="experience.html" class="sidebar-icon" data-section="experience" title="Experience">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                     <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                 </svg>
-                <span class="sidebar-label">Work</span>
+                <span class="sidebar-label">Experience</span>
             </a>
-            <a href="#about" class="sidebar-icon" data-section="about" title="Stack">
+            <a href="projects.html" class="sidebar-icon" data-section="projects" title="Projects">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                     <path d="M2 17l10 5 10-5"></path>
                     <path d="M2 12l10 5 10-5"></path>
                 </svg>
-                <span class="sidebar-label">Stack</span>
+                <span class="sidebar-label">Projects</span>
             </a>
-            <a href="#" target="_blank" class="sidebar-icon" data-section="resume" title="Resume">
+            <a href="index.html#contact" class="sidebar-icon" data-section="contact" title="Contact">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
-                <span class="sidebar-label">Resume</span>
+                <span class="sidebar-label">Contact</span>
             </a>
         </nav>
     </aside>
@@ -81,12 +80,31 @@
     <main>
         <section id="home" class="hero">
             <div class="hero-content">
+                <div class="hero-intro">
                 <h1>Sai Nelluri</h1>
                 <h2 class="role-title">Researcher and Computer Engineering Student</h2>
-                <p class="hero-description">Electrical and Computer Engineering student at NC State University and active researcher working at the intersection of technology and the human brain. I build real-world systems by combining engineering, cognitive science, and business. Open to internships, research, and collaborations.</p>
-                <div class="cta-buttons">
-                    <button class="cta-button projects-button" onclick="scrollToSection('about')">View Projects</button>
-                    <button class="cta-button contact-button" onclick="scrollToSection('contact')">Get In Touch</button>
+                </div>
+                <div class="hero-personality">
+                    <div class="typing-container">
+                        <span class="typing-text">I AM </span><span class="typing-word"></span><span class="typing-cursor">|</span>
+                    </div>
+                </div>
+                <div class="hero-description-wrapper">
+                    <p class="hero-description">Building intelligent systems at the intersection of hardware, software, and biology.</p>
+                </div>
+                <div class="hero-actions">
+                    <div class="cta-buttons">
+                        <a href="projects.html" class="cta-button projects-button">View Projects</a>
+                        <a href="experience.html" class="cta-button experience-button">My Experience</a>
+                        <button class="cta-button contact-button" onclick="scrollToSection('contact')">Get In Touch</button>
+                    </div>
+                    <p class="hero-signal">Seeking roles in Embedded Systems, Digital Design, and Computer Architecture — open to research and technical collaborations.</p>
+                    <div class="scroll-indicator">
+                        <span class="scroll-text">Scroll to explore</span>
+                        <svg class="scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14M19 12l-7 7-7-7"></path>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </section>
@@ -94,18 +112,23 @@
         <section id="about" class="section">
             <div class="container">
                 <div class="portfolio-grid">
-                    <div class="portfolio-card profile-card">
+                    <a href="about.html" class="portfolio-card profile-card clickable-card">
+                        <div class="card-external-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </div>
                         <div class="card-header">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
                             </svg>
-                            <h3>RECENT WORK</h3>
+                            <h3>About Me</h3>
                         </div>
-                        <p class="profile-bio">I am currently building projects across digital chip design, embedded systems, and electronics, focusing on how hardware choices influence performance, efficiency, and scalability. This work includes RTL design, embedded firmware, custom PCB development, and hardware–software co-design, with increasing emphasis on computer architecture, VLSI, and ASIC development. My goal is to develop a strong, hands-on understanding of how modern computing systems are built and to apply that knowledge to create reliable, real-world technology.</p>
-                    </div>
+                        <p class="profile-bio">I turn "what if" into working systems. I build hardware-software platforms where embedded design, digital logic, and computer architecture decisions matter. Currently, I'm exploring how GenAI and machine learning can accelerate hardware design, verification, and engineering workflows. I'm passionate about building scalable, startup-driven solutions, exploring new technologies, and contributing to research that makes a real-world impact.</p>
+                    </a>
 
                     <div class="portfolio-card philosophy-card">
                         <div class="card-header">
@@ -114,7 +137,7 @@
                             </svg>
                             <h3>PHILOSOPHY</h3>
                         </div>
-                        <p>Always curious and never finished, with a clear commitment to continuous growth. I pursue improvement through disciplined inquiry, consistent execution, and learning from every outcome.</p>
+                        <p>I view success as a continuous journey. Curiosity drives meaningful progress, and failure becomes a stepping stone when paired with discipline and reflection.</p>
                     </div>
 
                     <div class="portfolio-card connect-card">
@@ -153,12 +176,26 @@
                         </div>
                     </div>
 
-                    <div class="portfolio-card experience-card">
+                    <a href="experience.html" class="portfolio-card experience-card clickable-card">
+                        <div class="card-external-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </div>
                         <div class="experience-number">1+</div>
                         <div class="experience-label">YRS EXPERIENCE</div>
-            </div>
+                    </a>
 
-                    <div class="portfolio-card intern-card">
+                    <a href="experience.html" class="portfolio-card intern-card clickable-card">
+                        <div class="card-external-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </div>
                         <div class="intern-positions">
                             <div class="intern-position">
                                 <div class="card-header">
@@ -166,11 +203,11 @@
                                         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                                         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                                     </svg>
-                                    <h3>Embedded Systems Researcher</h3>
+                                    <h3>Embedded Engineer Intern</h3>
                                     <span class="card-date">May 2025 - Present</span>
                                 </div>
                                 <div class="card-company">Vazquez Research Group</div>
-                                <p>Built automated biosensing hardware with real-time control and monitoring. Focused on system miniaturization and data-driven validation for research-scale deployment.</p>
+                                <p>Built automated biosensing hardware with real-time control and monitoring, contributing to research-scale experimental validation and system deployment.</p>
                             </div>
                             <div class="intern-position">
                                 <div class="card-header">
@@ -178,16 +215,23 @@
                                         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                                         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                                     </svg>
-                                    <h3>Wireless Integration Research Assistant</h3>
+                                    <h3>Wireless Integration Intern</h3>
                                     <span class="card-date">May 2025 - Present</span>
                                 </div>
                                 <div class="card-company">Active Robotic Sensing Laboratory (AROS)</div>
-                                <p>Worked on real-time audio capture and wireless transmission using embedded systems. Explored high-speed digital protocols and low-power PCB design for scalable sensing platforms.</p>
+                                <p>Developed embedded audio capture and wireless transmission pipelines, exploring low-power PCB design and high-speed digital protocols for scalable sensing systems.</p>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <div class="portfolio-card education-card">
+                    <a href="experience.html" class="portfolio-card education-card clickable-card">
+                        <div class="card-external-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                                <line x1="10" y1="14" x2="21" y2="3"></line>
+                            </svg>
+                        </div>
                         <div class="card-header">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
@@ -199,13 +243,13 @@
                             <div class="education-degree">Bachelor's in Electrical and Computer Engineering</div>
                             <div class="education-minor">Minor in Cognitive Science and Business Administration</div>
                             <div class="education-school">NC State University</div>
-                            <div class="education-details">2024-2028</div>
+                            <div class="education-details"><span class="education-gpa">GPA: 3.8/4.0</span> <span class="gpa-separator">•</span> 2024-2028</div>
                             <div class="education-coursework">
                                 <div class="coursework-label">Relevant Coursework:</div>
-                                <div class="coursework-list">Embedded Systems, Data Structures, Electric Circuits, Complex Digital Systems, Microprocessor Architecture</div>
+                                <div class="coursework-list">Embedded Systems, Data Structures, Complex Digital Systems, Microprocessor Architecture</div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
                     <div class="portfolio-card skills-card">
                         <div class="card-header">
@@ -223,10 +267,9 @@
                             <span class="skill-tag">C</span>
                             <span class="skill-tag">C++</span>
                             <span class="skill-tag">Verilog/VHDL</span>
-                            <span class="skill-tag">System Verilog</span>
                             <span class="skill-tag">Python</span>
+                            <span class="skill-tag">System Verilog</span>
                             <span class="skill-tag">MATLAB</span>
-                            <span class="skill-tag">Linux Shell</span>
                             <span class="skill-tag">KiCad</span>
                             <span class="skill-tag">Fusion 360</span>
                             <span class="skill-tag">EDA tools</span>
@@ -238,10 +281,10 @@
             </div>
         </section>
 
-
         <section id="contact" class="section contact">
             <div class="container">
                 <h2>Get In Touch</h2>
+                <p class="contact-intro">I'm always interested in new opportunities, research collaborations, and interesting conversations about AI, technology, and innovation.</p>
                 <div class="contact-box">
                     <div class="contact-content">
                     <div class="connect-section">
