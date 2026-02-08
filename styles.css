@@ -2318,8 +2318,15 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
 }
 
 @media (max-width: 768px) {
+    .sidebar {
+        left: 50%;
+        top: 0.75rem;
+        bottom: auto;
+        transform: translateX(-50%);
+    }
+    
     .social-icons {
-        top: 1rem;
+        top: 5rem;
         left: 1rem;
         gap: 0.5rem;
     }
@@ -2335,7 +2342,7 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
     }
     
     .email-display {
-        top: 1rem;
+        top: 5rem;
         right: 1rem;
         font-size: 0.65rem;
         padding: 0.4rem 0.75rem;
@@ -2343,13 +2350,6 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }
-    
-    .sidebar {
-        left: 50%;
-        bottom: 1.5rem;
-        top: auto;
-        transform: translateX(-50%);
     }
     
     .sidebar-nav {
@@ -2393,7 +2393,8 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
     
     main {
         margin-left: 0;
-        padding-bottom: 80px;
+        padding-top: 5rem;
+        padding-bottom: 2rem;
     }
 
     .hero-content {
@@ -2549,14 +2550,77 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
     }
 
 
+    .contact .container {
+        padding: 0 1rem;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
     .contact-box {
-        padding: 2rem 1.5rem;
+        padding: 1.25rem 1rem;
         margin-top: 2rem;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     .contact-content {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.25rem;
+    }
+
+    .connect-section h3,
+    .contact-info-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .connect-section,
+    .contact-info-section {
+        gap: 0.75rem;
+    }
+
+    .connect-links {
+        gap: 0.5rem;
+    }
+
+    .connect-link {
+        padding: 0.5rem 0.75rem;
+        gap: 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    .connect-link svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .connect-link span {
+        font-size: 0.8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .contact-info-list {
+        gap: 0.5rem;
+    }
+
+    .contact-info-item {
+        padding: 0.5rem 0.75rem;
+        gap: 0.6rem;
+    }
+
+    .contact-info-item svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    .contact-info-item span {
+        font-size: 0.8rem;
+        line-height: 1.4;
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 
     .projects-container {
