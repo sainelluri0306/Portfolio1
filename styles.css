@@ -2461,14 +2461,22 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
     }
 
     .cta-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 300px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        max-width: 320px;
     }
 
     .cta-button {
-        width: 100%;
-        padding: 1rem 2rem;
+        flex: 1 1 calc(50% - 0.375rem);
+        min-width: 120px;
+        padding: 1rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .cta-button:nth-child(3) {
+        flex: 1 1 100%;
     }
 
     .scroll-indicator {
@@ -2497,17 +2505,6 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
         font-size: 0.75rem;
     }
 
-    .cta-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 280px;
-    }
-
-    .cta-button {
-        width: 100%;
-        padding: 1rem 2rem;
-        font-size: 0.95rem;
-    }
 
     .services-grid {
         grid-template-columns: 1fr;
