@@ -798,7 +798,7 @@ setTimeout(initPortfolioCards, 100);
     if (!typingWord || !typingContainer) return;
     
     const hasAnimated = sessionStorage.getItem('hasAnimated') === 'true';
-    const words = ['RELENTLESS', 'BRAVE', 'STRONG', 'CURIOUS', 'DRIVEN', 'FOCUSED', 'INNOVATIVE', 'PASSIONATE', 'DETERMINED', 'RESILIENT'];
+    const words = ['INNOVATIVE', 'TECH-DRIVEN', 'DISCIPLINED', 'PASSIONATE', 'STRATEGIC', 'CURIOUS', 'MOTIVATED', 'ADAPTABLE', 'RESEARCH-FOCUSED', 'AMBITIOUS', 'RESOURCEFUL', 'RESILIENT'];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
