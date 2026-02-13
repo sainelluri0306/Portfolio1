@@ -2318,41 +2318,38 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
 }
 
 @media (max-width: 768px) {
-    /* Mobile: menu bar fixed at very top, then row with social icons (left) + email (right) */
-    .sidebar {
-        position: fixed !important;
-        left: 50% !important;
-        top: max(0.5rem, env(safe-area-inset-top)) !important;
-        bottom: auto !important;
-        transform: translateX(-50%) !important;
-        z-index: 1002;
-    }
-    
-    .email-display {
-        position: fixed !important;
-        top: 4.25rem !important;
-        right: 1rem !important;
-        left: auto !important;
-        transform: none !important;
-        font-size: 0.65rem;
-        padding: 0.45rem 0.75rem;
-        max-width: calc(100vw - 140px);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        border-radius: 8px;
-        background: rgba(25, 25, 25, 0.9);
-        backdrop-filter: blur(8px);
-        z-index: 1001;
-    }
-    
+    /* Mobile: social icons (left) + email (right) at top; menu bar fixed at bottom */
     .social-icons {
         position: fixed !important;
-        top: 4.25rem !important;
+        top: 1rem !important;
         left: 1rem !important;
         transform: none !important;
         gap: 0.5rem;
         z-index: 1001;
+    }
+    
+    .email-display {
+        position: fixed !important;
+        top: 1rem !important;
+        right: 1rem !important;
+        left: auto !important;
+        transform: none !important;
+        font-size: 0.65rem;
+        padding: 0.4rem 0.75rem;
+        max-width: calc(100vw - 140px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 1001;
+    }
+    
+    .sidebar {
+        position: fixed !important;
+        left: 50% !important;
+        top: auto !important;
+        bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+        transform: translateX(-50%) !important;
+        z-index: 1002;
     }
     
     .social-icon {
@@ -2369,14 +2366,14 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
     
     .sidebar-nav {
         flex-direction: row;
-        padding: 0.6rem 1rem;
-        gap: 0.6rem;
-        border-radius: 60px;
-        background: rgba(20, 20, 20, 0.95);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        padding: 0.6rem 0.75rem;
+        gap: 0.5rem;
+        border-radius: 16px;
+        background: rgba(30, 30, 30, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
     }
     
     .sidebar-icon {
@@ -2413,8 +2410,8 @@ a, button, .portfolio-card, .project-card, .experience-content-box {
     
     main {
         margin-left: 0;
-        padding-top: 6.5rem;
-        padding-bottom: 3rem;
+        padding-top: 5rem;
+        padding-bottom: 5.5rem;
     }
 
     html {
